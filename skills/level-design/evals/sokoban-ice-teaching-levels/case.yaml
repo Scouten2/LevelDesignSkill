@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: sokoban-ice-teaching-levels
+expected_outcome: |
+  Three exact, rectangular level grids in the user's glyph format, each solvable, each needing the ice mechanic, ordered as a teaching progression (introduce, develop, twist), with intended solutions and honest statements about how solvability was checked.

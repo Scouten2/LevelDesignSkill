@@ -1,0 +1,3 @@
+{"jump_height": 4.0, "jump_distance": 6.0, "player_width": 1, "player_height": 1,
+ "air_control": true, "coyote_time": 0.1, "double_jump": false, "wall_jump": false,
+ "dash_distance": 0, "fall_damage_height": null, "safe_fall_height": null}

@@ -1,0 +1,6 @@
+[{"id": "hub", "label": "Arrive in town", "gives": ["town"]},
+ {"id": "p1", "needs": ["town"], "gives": ["a"]},
+ {"id": "p2", "needs": ["town"], "gives": ["b"]},
+ {"id": "p3", "needs": ["town"], "gives": ["c"]},
+ {"id": "p4", "needs": ["town"], "gives": ["d"]},
+ {"id": "end", "label": "Finale", "needs": ["a", "b", "c", "d"]}]

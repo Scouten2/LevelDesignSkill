@@ -1,0 +1,5 @@
+a: Find lens | gives: lens
+b: Build telescope | needs: lens, tube | gives: telescope
+c: Read stars | needs: telescope | gives: tube
+d: Open vault | needs: crowbar
+e: Exit | needs: lens

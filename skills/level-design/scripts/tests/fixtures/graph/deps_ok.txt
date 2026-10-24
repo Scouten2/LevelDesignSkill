@@ -1,0 +1,8 @@
+# Hand-made adventure chart
+start: Wake in cell | gives: spoon
+dig: Dig tunnel | needs: spoon | gives: yard_access, dirt
+guard: Distract guard | needs: yard_access | gives: keys
+shed: Open shed | needs: yard_access | gives: rope
+wall: Climb wall | needs: rope, keys | gives: freedom
+pot: Hide dirt in pots | needs: dirt | gives: no_alarm
+gate: Leave by gate | needs: freedom, no_alarm

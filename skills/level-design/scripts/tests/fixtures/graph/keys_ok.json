@@ -1,0 +1,11 @@
+{"start": "Entry", "goal": "Boss",
+ "nodes": [
+  {"id": "Entry"}, {"id": "Hall"}, {"id": "Armory", "items": ["red_key"]},
+  {"id": "Gallery", "items": ["blue_key"]}, {"id": "Vault", "items": ["map"]}, {"id": "Boss"}],
+ "edges": [
+  {"from": "Entry", "to": "Hall"},
+  {"from": "Hall", "to": "Armory"},
+  {"from": "Hall", "to": "Gallery", "requires": ["red_key"]},
+  {"from": "Gallery", "to": "Entry", "oneway": true},
+  {"from": "Gallery", "to": "Vault"},
+  {"from": "Hall", "to": "Boss", "requires": ["blue_key"]}]}

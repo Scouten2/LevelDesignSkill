@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: soulslike-vertical-castle-district
+expected_outcome: |
+  A full area design (brief, topology, beat chart, spaces) that uses verticality deliberately: hidden-but-fair vertical routes, drops classified against the stated fall thresholds, shortcuts looping back to the checkpoint, multi-floor spaces shown in section, and attention to players missing hidden routes.

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Level Design"
+  short_description: "Design, verify and critique game levels in any engine"
+  default_prompt: "Use the level-design skill to plan, verify or critique this level."
+
+policy:
+  allow_implicit_invocation: true

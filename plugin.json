@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "level-design",
+  "version": "1.0.0",
+  "description": "Engine-agnostic game level design: briefs, layout and flow, verticality, pacing, fun checks, accessibility, playtesting, deep puzzle and platformer guides, 20+ genre guides, and bundled checker scripts (grid lint, puzzle solver, platformer reachability, lock-and-key graphs).",
+  "author": { "name": "Scouten2", "url": "https://github.com/Scouten2" },
+  "repository": "https://github.com/Scouten2/LevelDesignSkill",
+  "license": "MIT",
+  "keywords": ["level-design", "game-design", "unreal", "unity", "godot", "puzzle", "platformer"]
+}

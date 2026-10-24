@@ -1,0 +1,5 @@
+{"start": "A", "goal": "C",
+ "nodes": [{"id": "A"}, {"id": "B"}, {"id": "C"}, {"id": "Island", "items": ["gold_key"]}],
+ "edges": [
+  {"from": "A", "to": "B"},
+  {"from": "B", "to": "C", "requires": ["gold_key"]}]}

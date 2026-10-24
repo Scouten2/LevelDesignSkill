@@ -1,0 +1,12 @@
+{
+  "name": "level-design",
+  "owner": { "name": "Scouten2" },
+  "plugins": [
+    {
+      "name": "level-design",
+      "description": "Engine-agnostic game level design: briefs, layout and flow, verticality, pacing, fun checks, accessibility, playtesting, deep puzzle and platformer guides, 20+ genre guides, and bundled checker scripts (grid lint, puzzle solver, platformer reachability, lock-and-key graphs).",
+      "source": "./",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{"start": "S", "goal": "G",
+ "nodes": [{"id": "S", "items": ["small_key"]}, {"id": "Closet"}, {"id": "Corridor"}, {"id": "G"}],
+ "edges": [
+  {"from": "S", "to": "Closet", "requires": ["small_key"], "consumes": true},
+  {"from": "S", "to": "Corridor", "requires": ["small_key"], "consumes": true},
+  {"from": "Corridor", "to": "G"}]}

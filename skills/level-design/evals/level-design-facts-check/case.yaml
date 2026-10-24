@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: level-design-facts-check
+expected_outcome: |
+  Accurate statements of Taylor's ten principles (including principle 7 being about letting the player control the difficulty) and correct photosensitivity thresholds (no more than about 3 flashes per second, area limits, saturated red), with sources or caveats.

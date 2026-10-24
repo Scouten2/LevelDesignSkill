@@ -1,0 +1,4 @@
+level-design-workspace/
+__pycache__/
+*.pyc
+dist/

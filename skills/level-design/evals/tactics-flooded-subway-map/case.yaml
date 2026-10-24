@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: tactics-flooded-subway-map
+expected_outcome: |
+  A dimensioned tile map with legend, cover placement supporting flanking and multiple approaches, objective timing that prevents turtling, telegraphed enemy activation/reinforcements, use of elevation and the flooded terrain, and an explanation of the intended play.

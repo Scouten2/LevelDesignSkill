@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: critique-seeded-defects
+expected_outcome: |
+  A prioritised review that finds the planted defects: puzzle2 is unsolvable (the two boxes block each other in the corridor), puzzle3 has a shortcut far shorter than the intended 10-push solution (4 pushes), the platformer flag is unreachable because the 6-tile pit exceeds the 5-tile jump, the secret door is a colour-only cue gating required progress, the 6 Hz full-screen flashing exceeds photosensitivity limits, plus the missing checkpoint and the empty dead end; each with a concrete fix.
+context:
+  scaffold_script: place-files.sh

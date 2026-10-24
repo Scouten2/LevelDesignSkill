@@ -1,0 +1,6 @@
+{"start": "Hub", "goal": "Exit",
+ "nodes": [{"id": "Hub"}, {"id": "Pit"}, {"id": "Gate", "items": ["lever"]}, {"id": "Exit"}],
+ "edges": [
+  {"from": "Hub", "to": "Pit", "oneway": true},
+  {"from": "Hub", "to": "Gate"},
+  {"from": "Hub", "to": "Exit", "requires": ["lever"]}]}
