@@ -14,7 +14,7 @@
 11. Moving platforms, crushers and timing
 12. Difficulty across a world
 13. Flow, momentum and speedrun-friendly design
-14. 3D platformers: course, sandbox, mission world
+14. 3D platformers and embedded jump puzzles
 15. Authoring order and deliverable
 16. Review checklist
 17. Levels to study
@@ -125,7 +125,7 @@ McMillen: "(Percent chance the player will die) X (Penalty for dying) = Difficul
 
 ## 9. Secrets, hidden and vertical routes
 
-- **Secrets skip or reward; they never block.** 1-1's bonus pipe skips much of the level for experts.
+- **Secrets skip or reward; they never block.** 1-1's bonus pipe skips much of the level for experts. The six-point hidden-detour contract (goal before path, one take-off cue, a cheap miss, a loop back) is in `jump-puzzles.md` §2.
 - **Hidden-but-fair**: a hidden route needs its grammar taught somewhere safe, a view of it from at least one vantage (optional content may skip this), an invitation to look (a glint, a coin, a gap in the wall pattern), and a cheap failure. Full rule in `verticality.md` §4, drop signalling in §5.
 - **Keep secret tells consistent** [convention]: if cracked walls break once, every cracked wall breaks.
 - **No guessing with death as the only feedback** [convention]: "pick the right pipe" or a blind drop is a leap of faith (`platformer-checks.md` §2).
@@ -161,13 +161,9 @@ McMillen: "(Percent chance the player will die) X (Penalty for dying) = Difficul
 - **Multiple lines through one space** reward mastery: a safe line, a fast line, a collectible line.
 - **Speedrun-friendly** [convention]: consistent physics, skippable cutscenes, sequence breaks that don't softlock (run the softlock check on skip routes too), timers and replays where the audience wants them.
 
-## 14. 3D platformers: course, sandbox, mission world
+## 14. 3D platformers and embedded jump puzzles
 
-- **Course levels** (3D Land, 3D World, Astro Bot): linear, one concept, four beats, a clear goal. Treat them like 2D levels with a depth axis.
-- **Sandbox worlds** (Odyssey kingdoms): dense small spaces, a reward or curiosity on every sightline, a big landmark for orientation, and collecting does not eject the player. Structure is a hub with radiating challenges, not a line.
-- **Mission worlds** (Mario 64): one space reconfigured per objective (Whomp's Fortress); many objectives out of order.
-- **Depth is the weak axis**: shadow directly under the player and every floating object, countable geometry along depth, wider landings for depth-axis jumps, and jump aids where judgement is hard (3D Land kept Tanooki's slow fall as an optional aid). Camera rules and 3D-specific checks in `platformer-camera.md` §8–9.
-- **Choose the space with the camera**: Galaxy's small planets let the team tune play "without ever having to think about the camera" (Koizumi, MIGS 2007).
+3D courses, sandboxes and mission worlds, depth, the 3D camera, failure models and the jump-link table are in `platformer-3d.md`. Hidden detours, optional jumping puzzles, challenge chambers, puzzle-platforming, ability gates and movement-map tiers are in `jump-puzzles.md`. Use those two (with `assets/jump-sequence-spec.md` and `jump_links.py`) for 3D work; this file stays the 2D method.
 
 ## 15. Authoring order and deliverable
 
@@ -195,7 +191,7 @@ Deliverable: kit table, concept and four-beat table, path graph, beat chart with
 - [ ] Hidden routes meet the hidden-but-fair rule; no leap of faith on the critical path
 - [ ] Enemies, movers and springs listed with coordinates, timing and semantics
 - [ ] Difficulty curve across the world plotted; no unsupported spikes
-- [ ] 3D: shadows under player and floating objects; landmark per area; depth jumps have wider landings
+- [ ] 3D or embedded jump content: specced and checked per `platformer-3d.md` §9
 - [ ] Script results quoted (reach, teaches, metrics, beat lint) with what wasn't modelled
 
 ## 17. Levels to study
@@ -205,6 +201,4 @@ Deliverable: kit table, concept and four-beat table, path graph, beat chart with
 - **Super Meat Boy**, a light-world level and its dark-world twin (retry economics).
 - **Super Mario Bros. Wonder**, any course with a Wonder effect (surprise without breaking rules).
 - **Super Mario 3D Land** (one concept per course, assist block) and **Super Mario 3D World** "Cakewalk Flip".
-- **Super Mario 64** Whomp's Fortress (mission world) and **Super Mario Odyssey** Cascade Kingdom (sandbox density).
-- **Super Mario Galaxy** planetoids (space shaped around the camera).
 - **Spelunky** (path-first room generation) and **Getting Over It** (progress loss as the design; catch ledges).

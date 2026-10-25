@@ -1,5 +1,7 @@
 # Movement Kit
 
+For 3D sequences, embedded jump puzzles and movement maps, use `assets/jump-sequence-spec.md` instead (its Moves table feeds `scripts/jump_links.py`).
+
 Fill this **before** drawing any platformer level (method: `references/platformer-metrics.md` §1–4, §11).
 One kit per character or power-up state. Write "assumed" next to any number not read from code or measured
 in a gym; write "n/a" for moves the game lacks. Units: tiles and seconds (3D: metres, or player widths).

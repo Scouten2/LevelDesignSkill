@@ -8,9 +8,8 @@
 5. Per-region camera spec
 6. Vertical sections: climbs, descents, kill planes
 7. Camera paper checks
-8. 3D: Koizumi's three problems
-9. 3D: shaping space around the camera
-10. Review checklist
+8. 3D cameras
+9. Review checklist
 
 > Confidence tags: untagged claims come from developer statements, primary sources or well-documented analyses (see `SOURCES.md`). **[convention]** = practitioner practice or a tunable default with no source behind the number. **[contested]** = sources disagree. **[unverified]** = could not be checked; don't quote it as fact.
 
@@ -97,30 +96,11 @@ Run these on the ASCII map with the camera spec beside it; the full check table 
 - Where the player reverses often, is there hysteresis so the camera doesn't swing on every turn?
 - Do region transitions keep the player and the next threat in view?
 
-## 8. 3D: Koizumi's three problems
+## 8. 3D cameras
 
-Koizumi named three 3D problems: "problematic depth perception, getting lost, and even getting motion sickness" (MIGS 2007, Mario 64 to Galaxy).
+Moved to `platformer-3d.md` §3–4: the shadow, the screen-plane rule, Koizumi's three problems, Nesky's airborne rules and choosing a camera mode per sequence.
 
-| Problem | Nintendo's fix | Level-design rule |
-|---|---|---|
-| Depth perception | A shadow "directly under the character regardless of the light source. It might not be realistic, but it's much easier to play with the shadow directly below." | Shadow under the player and every floating coin, block and platform (3D Land: "If you look at the shadow of a Coin or Block, you know that is where you should jump"). 3D Land also makes the player's shadow fall onto enemies to make stomps easier. |
-| Getting lost | "We included large landmarks so players could orient themselves without stopping"; Sunshine adds a central landmark and arrow signs | One landmark visible from most of each area; no map reading mid-action. |
-| Motion sickness | A vertical "shake cushion": no vertical pan while the character is near screen centre, only when about to leave the frame | Vertical dead zone; jumps shouldn't tilt the camera. |
-
-- Mario 64 weighed three camera types: parallel (2D-like, hardest to get lost), tower (straight-on side view) and follow. Pick per area.
-- Free camera control in Sunshine and Ocarina of Time made "the overall control scheme… too complex"; Galaxy's small planets let players "play without ever having to think about the camera."
-- **Height feels different from how it measures.** 3D Land testers said a pit fall was "so high I'm scared!" and the team readjusted the height. Check fear and readability, not just metres.
-- 3D Land dropped hover and spin jump aids because its stereoscopic 3D made platforms easier to judge, but kept Tanooki's slow fall as an optional aid. If your game lacks such depth cues, plan aids or wider landings.
-
-## 9. 3D: shaping space around the camera
-
-- **Choose the camera model per area, then shape the space for it**: corridors and courses suit fixed or rail cameras; open sandboxes suit a follow camera with landmarks.
-- **Precision sections get a fixed, scripted or strongly constrained camera** [convention]; never require manual camera work during a hard jump.
-- **Prefer jumps across the screen to jumps into it** [convention]. Depth-axis jumps need the shadow, countable geometry (tiles, posts, coin rows) and a wider landing (≥ 25% margin) [convention].
-- **Keep critical information within normal camera pitch**: gamepad players tend to "park" vertical rotation (TLDB, verticality), and Valve found that "Players very rarely look up" (Game Informer, *Thinking With Portals*, 2010). Lead the eye up with structure, light or motion when the next goal is above (`verticality.md`).
-- **Test camera collision in tight spaces**: corners and low ceilings break follow cameras first (`metrics.md` §5).
-
-## 10. Review checklist
+## 9. Review checklist
 
 - [ ] Camera spec line written for every region (window/lock, vertical rule, lead, bottom edge, attractors, transition)
 - [ ] Window about one jump tall with platform-snapping, or a stated reason otherwise
@@ -129,6 +109,4 @@ Koizumi named three 3D problems: "problematic depth perception, getting lost, an
 - [ ] View never scrolls below a kill plane; safe bottoms show floor
 - [ ] Climbs lead upward; descents show the landing or are off the critical path
 - [ ] No projected focus vertically
-- [ ] 3D: shadow under player and floating objects; player shadow lands on enemies
-- [ ] 3D: landmark per area; vertical dead zone; no manual camera needed in precision sections
-- [ ] 3D: depth-axis jumps have countable geometry and wider landings; heights checked for fear, not just size
+- [ ] 3D: checked against `platformer-3d.md` §9

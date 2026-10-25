@@ -1,10 +1,10 @@
 ---
 name: level-design
-description: Expert game level design for planning, building, verifying, critiquing and fixing levels, maps and worlds in any engine (Unreal, Unity, Godot, etc.). Covers briefs, layout and flow, verticality, pacing and beat charts, player guidance, teaching mechanics, encounters, metrics, fun checks, accessibility, blockout and playtesting, plus bundled scripts that lint tile maps, solve grid puzzles, check platformer jump reachability and lock-and-key graphs. Deep guides for puzzle and platformer levels, and genre guides for shooters, stealth, horror, dungeons/metroidvanias, multiplayer, open worlds, RPGs, roguelikes, tactics, RTS, tower defense, casual/mobile, VR, co-op PvE, boss arenas/raids, racing and UGC platforms. Use whenever the user is designing, sketching, generating, blocking out, reviewing or fixing a level, map, puzzle, arena, track, dungeon or game space, even if they don't say "level design".
+description: Expert game level design for planning, building, verifying, critiquing and fixing levels, maps, jump puzzles and worlds in any engine (Unreal, Unity, Godot). Covers briefs, layout and flow, verticality, pacing and beat charts, player guidance, teaching mechanics, encounters, metrics, fun checks, accessibility, blockout and playtesting, plus checker scripts for tile maps, grid puzzles, 2D platformer reach, 3D jump links and lock-and-key graphs. Deep guides for puzzle and platformer levels, 3D traversal, hidden and optional jumping puzzles, parkour, obby and KZ-style movement maps, and genre guides for shooters, stealth, horror, dungeons/metroidvanias, multiplayer, open worlds, RPGs, roguelikes, tactics, RTS, tower defense, casual/mobile, VR, co-op PvE, boss arenas/raids, racing and UGC platforms. Use whenever the user is designing, sketching, generating, blocking out, reviewing or fixing a level, map, puzzle, jumping puzzle, traversal route, arena, track or dungeon, even if they don't say "level design".
 license: MIT
 compatibility: Bundled checker scripts need Python 3.8+ and code execution; without them, checks are hand-traced and labelled unverified.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Level Design
@@ -62,6 +62,7 @@ Scale the workflow to the request: a quick question gets a direct answer; a sing
 | `scripts/grid_lint.py` | Format gate for any character grid: size, ragged rows, unknown glyphs with `(col,row)`, counts, `--expect`, `--emit-ruled` for display |
 | `scripts/grid_puzzle_solve.py` | Sokoban-family puzzles (push, ice, keys/doors, pits, switches): solvable/unsolvable/unknown, optimal solution, `--forbid` bypass test, `--intended` shortcut test, `--metrics` difficulty signals, `--classes` uniqueness |
 | `scripts/platformer_reach.py` | Tile-map platformer levels with a movement-kit JSON: goal reachability, critical-jump margins, unreachable collectibles, softlocks, `--teaches` test |
+| `scripts/jump_links.py` | 3D (or any non-tile) jump sequences as a jump-link table: % of each move per link, critical links, softlocks, respawns past one-way links, fall bands, depth-axis jumps, teasers, skip scan, `--teaches`, tier estimate; prescriptive fixes |
 | `scripts/graph_check.py` | Lock-and-key / hub / dungeon graphs (JSON or Mermaid): reachability, key order, consumed-key softlocks, dead ends, loops |
 | `scripts/dependency_chart.py` | Puzzle dependency charts: cycles, unreachable puzzles, layer widths, bottlenecks, Mermaid export |
 | `scripts/beat_lint.py` | Beat-chart tables: rest around peaks, new concepts per beat, choice gaps, retry-cost budget, checkpoint coverage |
@@ -74,6 +75,7 @@ Invoke as `python3 -I scripts/<name>.py --help`. Exit codes: 0 pass, 1 fail, 2 b
 - **Answer shape: design first, process last.** Write for the designer who will build this. Lead with the design (or the ranked problems, for a critique); put verification in a short plain-language line per artifact ("checked by script: solvable in 18 moves, ice required, no shortcut"). Raw script output, rubric scores, workflow checklists and scratch-file names go in a short appendix at the end, or are left out when the user didn't ask for them. Never point the user at files they don't have; give them the level text and the command instead. Blind reviews marked answers down for process noise even when the design was better.
 - **Topology:** Mermaid `flowchart`; nodes = spaces with role, intensity and floor (`F2`); edges labelled `req:key`, `shortcut`, `↓drop`, `↑ladder`, `⇅lift`; one-way edges dotted (`-.->`); sightline-only vistas as `A -. vista .- B` (not walkable). Mark the critical path. Notation and a worked example: [references/layout-and-flow.md](references/layout-and-flow.md) §11.
 - **Beat chart:** Markdown table `# | Beat | Mechanic (stage) | Intensity | Emotion | New concepts | Choice | Expected deaths | Replay cost | Checkpoint | Duration | Guidance cues | Assist hooks | Telemetry | Hypothesis` (intensity 1–5, replay cost in seconds; `beat_lint.py` reads these headers; drop the last three columns for quick drafts). Columns explained in [references/process.md](references/process.md) §5.
+- **Jump sequences (3D or non-tile):** the four tables of [assets/jump-sequence-spec.md](assets/jump-sequence-spec.md) (kit, moves, nodes, links) plus a section and plan view; never a prose-only list of jumps.
 - **Grids:** per [references/grid-conventions.md](references/grid-conventions.md): size and scale first, `(col,row)` origin top-left, ruler + row indices for display, legend, key-object list. Multi-floor spaces also get a section (side) view.
 - **Dimensions:** always with units and the metric they derive from ("door 1.3 m = player width × 1.6").
 - **Verification lines:** "Verified by `grid_puzzle_solve.py`: …" or "Hand-traced, not machine-verified."
@@ -81,12 +83,36 @@ Invoke as `python3 -I scripts/<name>.py --help`. Exit codes: 0 pass, 1 fail, 2 b
 - **Revisions:** show a diff of what moved and why, not a silently retyped map.
 - **Evidence:** cite frameworks briefly when they help the user learn more; treat [convention] numbers as tunable defaults, and never present them as research findings.
 
+## Platformers and jump puzzles
+
+Pick the row for what you're building and load its files; add the genre guide and `verticality.md` only when the level also needs them (a soulslike area, more than one floor). Present no layout until its checker passes. A single sequence needs the spec and an ordered list of beats; a full level also gets the beat chart.
+
+| Building… | Load | Write | Check |
+|---|---|---|---|
+| 2D tile level | [platformer-craft.md](references/platformer-craft.md), [platformer-metrics.md](references/platformer-metrics.md), [platformer-checks.md](references/platformer-checks.md); [platformer-camera.md](references/platformer-camera.md) for scrolling or framing | [assets/movement-kit.md](assets/movement-kit.md) → concept and four beats → rhythm groups → ruled grid | `grid_lint.py` → `platformer_reach.py` (`--teaches`) → `beat_lint.py` |
+| 3D jump sequence, traversal route, climbing level; a 2D level that isn't a tile map | [platformer-3d.md](references/platformer-3d.md) (readability, depth, camera, failure models, link table) | [assets/jump-sequence-spec.md](assets/jump-sequence-spec.md) tables; section and plan views | `jump_links.py` (`--teaches`) |
+| Hidden detour, optional jumping puzzle, challenge chamber, puzzle-platforming, ability-gated route, movement map (KZ, surf, obby, Celeste-mod style) | [jump-puzzles.md](references/jump-puzzles.md), plus platformer-3d.md for 3D | the spec, header first: type, Think/Do, target tier, reward, discovery | `jump_links.py` |
+
+Worked example (spec → checker failure → fix → pass): [assets/example-jump-sequence.md](assets/example-jump-sequence.md).
+
+Gotchas:
+- **Challenge before geometry.** Name the concept, the Think/Do label, the failure model and the reward first; a list of jumps with no reason to exist is the typical weak answer.
+- **Numbers, not adjectives.** Every jump gets gap, rise, move and % of that move. "A tricky jump across the beams" is not a spec.
+- **Bands.** No critical jump above 90% of the move; depth-axis jumps (into the screen) ≤ 75% with landings ≥ 3 × player width; nothing usable at 100–130% (it looks makeable); teasers ≥ 130%.
+- **Goal before path.** The reward or exit is seen before the route; one take-off cue per hidden route; no blind critical jumps; optional puzzles get a vantage and one in-world hint.
+- **Every miss has a stated cost**, every respawn sits before every one-way link, and sequences longer than a few jumps get checkpoints. Falls stay clear (±10%) of the damage and lethal heights.
+- **Check what you didn't list.** Unlisted pairs within jumping range are skips; the checker's skip scan finds them when nodes have coordinates.
+- **Harder = more chaining, techniques and timing**, not wider gaps or more length. Movement-map tiers move several dials at once (jump-puzzles.md §7).
+- **Keep thinking and doing apart** on the critical path, and never change the physics for one section.
+- **Optional content loops back** and never blocks the ending; observation earns upgrades, pure-skill puzzles earn vistas, cosmetics or achievements.
+- **Lifts, movers, enemies and the camera aren't modelled** by any script: give their timing in seconds and list them as playtest risks.
+
 ## Genre guides (load the one that matches; several may apply)
 
 | Load when the level is… | File |
 |---|---|
 | **Puzzle** game, puzzle rooms, Sokoban-likes, rule puzzles, adventure/inventory, deduction | [puzzle-craft.md](references/puzzle-craft.md) (single puzzles; fill [assets/insight-card.md](assets/insight-card.md) first) · [puzzle-sequencing.md](references/puzzle-sequencing.md) (order, tiers, hints, dependency charts) · [puzzle-verification.md](references/puzzle-verification.md) (solver protocol, difficulty metrics) |
-| **Platformer**, 2D or 3D, precision or collectathon | [platformer-craft.md](references/platformer-craft.md) (structure, teaching, rhythm; fill [assets/movement-kit.md](assets/movement-kit.md) first) · [platformer-metrics.md](references/platformer-metrics.md) (movement kit, gap bands, retry budget) · [platformer-camera.md](references/platformer-camera.md) · [platformer-checks.md](references/platformer-checks.md) (paper checks, reach script) |
+| **Platformer**, jump puzzle, traversal or movement map, in any genre | Routes in **Platformers and jump puzzles** above; load only the row you need |
 | FPS / TPS campaign, combat arenas, character action, soulslike, shmup stages (§11) | [genre-action-combat.md](references/genre-action-combat.md) |
 | Boss fights, raid encounters | [boss-arenas-and-raids.md](references/boss-arenas-and-raids.md) |
 | Stealth or immersive sim, sandbox levels (Hitman), transforming levels (Clockwork Mansion) | [genre-stealth-immersive-sim.md](references/genre-stealth-immersive-sim.md) |

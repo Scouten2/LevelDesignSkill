@@ -1,6 +1,6 @@
 {
   "name": "level-design",
   "description": "Engine-agnostic game level design: briefs, layout and flow, verticality, pacing, fun checks, accessibility, playtesting, deep puzzle and platformer guides, 20+ genre guides, and bundled checker scripts (grid lint, puzzle solver, platformer reachability, lock-and-key graphs).",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": { "name": "Scouten2" }
 }

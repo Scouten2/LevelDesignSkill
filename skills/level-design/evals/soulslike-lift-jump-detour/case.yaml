@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: soulslike-lift-jump-detour
+expected_outcome: |
+  A spec-level design of an optional lift step-off detour with every jump given as numbers against the stated kit, a visible goal and take-off cue, a cheap and stated failure cost with respawns before any one-way links, a loop back to the main path, and verification claims backed by a checker run or labelled as hand-checked.
