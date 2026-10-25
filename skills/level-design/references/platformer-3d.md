@@ -24,7 +24,7 @@ Prose descriptions of 3D jumps can't be checked, and models misjudge distances i
 1. **Kit**: fill the Kit and Moves tables of `assets/jump-sequence-spec.md` from code or a gym (§7). If the user has none, propose one and label it assumed.
 2. **Header**: type, Think/Do label, camera mode, failure model, target tier, reward and how it's discovered (`jump-puzzles.md` §1).
 3. **Nodes and links**: one row per standing place and per traversal, with gap, rise, move, camera axis and what a miss does. Coordinates are optional but catch arithmetic slips.
-4. **Check**: `python3 -I scripts/jump_links.py spec.md`. It bands every link as a % of its move, finds critical links, softlocks, respawns past one-way links, lethal required drops, depth-axis precision jumps, teasers that look makeable, and estimates a tier. Fix and re-run (≤ 3 rounds); its messages say what to change ("shorten the gap to ≤ 3.6 m").
+4. **Check**: `python3 -I scripts/jump_links.py spec.md`. It bands every link as a % of its move, finds critical links, softlocks, respawns past one-way links, lethal required drops and falls near the damage thresholds, depth-axis precision jumps, teasers that look makeable, unlisted pairs in jumping range that would skip links, and estimates a tier. Fix and re-run (≤ 3 rounds); its messages say what to change ("shorten the gap to ≤ 3.6 m"). List walls that stop a flagged pair as `blocked` only when the geometry really does.
 5. **Views**: a section view and a plan view with camera arrows, then the timing list for lifts and movers.
 
 Bands are the same as 2D [convention]: intro ≤ 40%, routine ≤ 75%, skill ≤ 90%, expert ≤ 100% of the move at that rise. No critical link above 90%; opt-in expert content may go to 100% (`--critical-max 1.0`). Worked example: `assets/example-jump-sequence.md`.
@@ -32,6 +32,7 @@ Bands are the same as 2D [convention]: intro ≤ 40%, routine ≤ 75%, skill ≤
 ## 2. Readability: one affordance language
 
 - **Schatz's affordance types** (Naughty Dog): cultural and inferred affordances first (a ledge looks like a ledge); explicit and "defined" ones like painted handholds are the fallback. Shape language: rectangles read "usable", rounded shapes safe and unusable, diagonals and points danger. Artists removed rock cracks that read as false handholds near climbable areas.
+- **Combined moves are capabilities too**: jump + mantle, jump + ledge grab, a standing jump, a re-jump off a sinking block. Give each its own move row, and check that no route node can be reached early with a combo (the skip scan does this for listed moves).
 - **Dead zones** around every capability (Schatz): Drake reaches ledges up to 3.5 m, so no climbable edge sits between 3.25 m and 4 m; walkable slopes stay under 35° and nothing is built at 30°–45°. Apply the same −7%/+15% buffer to your jump distance, jump height, mantle height and grapple range (`metrics.md` §4).
 - **What you see is what you get.** Dying Light's rule was that "anything that looked climbable will be climbable"; Supraworld promises "the geometry you see is exactly what you get". The opposite failure is decorative geometry that reads as a route. Decide which surfaces are traversable before the art pass and keep them distinct.
 - **Explicit markers (yellow paint)** are contested: Remedy's Control Resonant director rejected them because "Somebody already decided for you"; Mirror's Edge's red runner vision was justified in-fiction, and its level designer Elisabetta Silli noted "Red is an odd choice because it means danger or stop". Default: consistent shape and material language first; add markers where playtests show misses; offer a toggle if you can (Star Wars Outlaws reportedly does [unverified]).
@@ -82,6 +83,7 @@ Half-Life's Xen is the canonical failure: "the biggest problem is the sudden cha
 - **Gap-ladder gym** before the level: rows of gaps at 50/75/90/100/110% of each move, ledges at the same steps of jump and mantle height, a slope ramp in 5° steps, and a fall tower marking safe, damage and lethal heights (Level Design Book's metrics zoo). Measure with grid textures and record the numbers in the Kit and Moves tables.
 - **Ranges, not single values**: kits vary with run-up, input timing and animation; record the reliable value (what testers make 9 times in 10), not the record [convention]. Assassin's Creed III reportedly specified jump ranges such as 0.8–1.2 m [unverified].
 - **Units**: Unreal cm, Unity and Godot m, Source units (`metrics.md` §7). State units in the Kit table.
+- **One spec per state**: when a shortcut, kicked-down ladder or collapsing bridge changes the graph, check a spec for each state (first visit, after the shortcut).
 
 ## 8. 3D level structures: course, sandbox, mission world
 

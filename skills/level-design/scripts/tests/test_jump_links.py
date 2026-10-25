@@ -110,6 +110,46 @@ class TestJumpLinks(unittest.TestCase):
         code, d, _ = run("-", stdin="no tables here\n")
         self.assertEqual(code, 2)
 
+    def test_kz_gate_ladder_firstperson_timing_scan(self):
+        code, d, c = run(fix("kz.md"), "--teaches", "crouchjump")
+        self.assertEqual(code, 0, c)
+        links = {x["link"]: x for x in d["links"]}
+        self.assertEqual(links["B->C"]["pct"], 0.0)         # gate move: graded on distance only
+        self.assertEqual(links["C->D"]["band"], "intro")    # built-in ladder
+        self.assertAlmostEqual(links["A->B"]["gap"], 192, 6)
+        self.assertEqual(c["fail-stated"]["status"], "PASS")  # "none" is a stated fail
+        self.assertIn("first person", " ".join(c["depth-axis"]["details"]))
+        self.assertEqual(c["teaches"]["status"], "PASS")
+        self.assertIn("D->E (crouchjump) can also be made with jump", " ".join(c["teaches"]["details"]))
+        scan = " ".join(c["skip-scan"]["details"])
+        self.assertIn("S->B: unlisted", scan)                # diagonal rectangle gap
+        self.assertIn("gap 160u", scan)                     # hypot(96, 128)
+        self.assertIn("S->C: unlisted, 104%", scan)          # looks makeable
+        self.assertIn("timed window <= 1 s", d["summary"]["tier_reasons"])
+        code, d, c = run(fix("kz.md"), "--no-scan")
+        self.assertNotIn("skip-scan", c)
+
+    def test_teaches_fails_when_other_move_can_make_every_link(self):
+        code, d, c = run(fix("kz.md"), "--teaches", "crouchjump", "--kit",
+                         '{"moves": {"jump": {"distance": 240, "height": 70}}}')
+        self.assertEqual(c["teaches"]["status"], "FAIL")
+
+    def test_fall_thresholds_and_duplicates(self):
+        doc = ("| Kit | Value |\n|---|---|\n| damage_fall | 5 |\n| lethal_fall | 14 |\n\n"
+               "| Move | Distance | Height |\n|---|---|---|\n| jump | 3.5 | 1 |\n\n"
+               "| Node | Role | Landing | X | Y | Z |\n|---|---|---|---|---|---|\n"
+               "| S | start | 3 | 0 | 0 | 14 |\n| A | | 3 | 5 | 0 | 14 |\n| P | | 20 | 0 | 0 | 0.5 |\n"
+               "| G | goal | 3 | 5 | 0 | 9.5 |\n\n"
+               "| From | To | Move | Fail |\n|---|---|---|---|\n| S | A | jump | fall P |\n"
+               "| A | G | drop | |\n| P | S | ladder | |\n")
+        code, d, c = run("-", stdin=doc)
+        det = " ".join(c["falls"]["details"])
+        self.assertIn("a miss falling to P drops 14.5", det)   # from the apex: lethal
+        self.assertIn("within 10% of damage_fall", det)        # the 4.5 m drop A->G
+        code, d, _ = run("-", stdin=doc.replace("| jump | 3.5 | 1 |", "| jump | 3.5 | 1 |\n| jump | 4 | 1 |"))
+        self.assertEqual(code, 2)
+        self.assertIn("listed twice", d["error"])
+
 
 if __name__ == "__main__":
     unittest.main()

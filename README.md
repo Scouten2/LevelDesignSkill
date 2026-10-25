@@ -6,7 +6,7 @@ It covers design, critique and layout verification (bundled Python checkers), wi
 
 ## Highlights
 
-- **Verify, don't assert.** Eight bundled Python scripts (stdlib only) check layouts instead of trusting the model's spatial reasoning: tile-map lint, a Sokoban-family puzzle solver with bypass/shortcut/uniqueness tests and validated difficulty metrics, platformer jump-reachability from a movement kit (including a "does this level actually teach the move?" test), a 3D jump-link checker for traversal routes and jump puzzles (respawns past one-way links, depth-axis jumps, teasers, tier estimate), lock-and-key graph checks, puzzle dependency charts, beat-chart linting and layout comparison.
+- **Verify, don't assert.** Eight bundled Python scripts (stdlib only) check layouts instead of trusting the model's spatial reasoning: tile-map lint, a Sokoban-family puzzle solver with bypass/shortcut/uniqueness tests and validated difficulty metrics, platformer jump-reachability from a movement kit (including a "does this level actually teach the move?" test), a 3D jump-link checker for traversal routes and jump puzzles (respawns past one-way links, unintended skips, depth-axis jumps, teasers, tier estimate), lock-and-key graph checks, puzzle dependency charts, beat-chart linting and layout comparison.
 - **Jump puzzles and 3D traversal**: hidden detours (Elden Ring-style lift step-offs and ledge routes), optional world jumping puzzles (Guild Wars 2, Destiny), challenge chambers (Jedi), puzzle-platforming and ability-gated routes (Supraland), and movement-map difficulty tiers (KZ, obbies, Celeste mods), with a jump-sequence spec template and a worked example.
 - **Deep puzzle and platformer guides** (3 + 6 files) built from primary sources: Blow and ten Bosch, Traynor, Teikari, Gilbert, Valve's Portal commentary, Jarušek & Pelánek; Hayashida, Celeste's released code, McMillen, Keren's camera article, World 1-1 measured from its tile map.
 - **Gameplay first and verticality** as core stances: grey description test, verb-per-space table, art-pass re-check; eight uses of height, "see it, then reach it from an unexpected height", a fairness rule for hidden vertical routes, drop bands, a Z-axis checklist.
@@ -25,7 +25,7 @@ skills/level-design/
 │                            # worked example, playtest hypothesis card, project-context template
 ├── agents/openai.yaml       # optional Codex / ChatGPT display metadata (other tools ignore it)
 ├── scripts/                 # grid_lint, grid_puzzle_solve, platformer_reach, jump_links, graph_check,
-│   └── tests/               # dependency_chart, beat_lint, level_metrics (+ 93 unit tests)
+│   └── tests/               # dependency_chart, beat_lint, level_metrics (+ 96 unit tests)
 └── references/
     ├── principles.md  layout-and-flow.md  verticality.md  metrics.md  process.md
     ├── grid-conventions.md  fun-checks.md  review-rubric.md  accessibility.md  playtesting-and-critique.md

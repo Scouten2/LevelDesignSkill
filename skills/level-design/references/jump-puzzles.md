@@ -41,7 +41,11 @@ FromSoftware's detours are small leaps of faith, each cued by something visible.
 6. **A loop back**: a one-way drop, a shortcut door or a lift that returns to the main path, so nobody walks back along the hard part.
 
 **Detour recipes** (FromSoftware examples verified on the series wikis):
-- **Lift step-off**: a ledge in the shaft that the lift passes. Raya Lucaria's rotating lift: step off mid-ride; on the way up a well-timed running jump reaches an item. Sen's Fortress's lift pauses at a mid-ride exit before a trap; in the Grand Archives (Dark Souls 3) rolling off a moving lift brings a second lift and a Titanite Slab. Cheap to author: one shaft, one ledge, a visible reward; the lift speed sets the timing window (state it in seconds).
+- **Lift step-off**: a ledge in the shaft that the lift passes. Raya Lucaria's rotating lift: step off mid-ride; on the way up a well-timed running jump reaches an item. Sen's Fortress's lift pauses at a mid-ride exit before a trap; in the Grand Archives (Dark Souls 3) rolling off a moving lift brings a second lift and a Titanite Slab. Cheap to author: one shaft, one ledge, a visible reward. Work out the details [convention]:
+  - **Window (s) = (highest step-up the player can make + deepest drop the opening allows) ÷ lift speed.** The opening's clear height caps the drop. Keep it ≥ ~1.2 s; a faster lift needs a taller opening. Put it in the link's Window column.
+  - **Make a mistimed try free**: a car-to-wall gap narrower than the player means nobody falls past the car; they ride on and try again on the way back.
+  - **The empty car carries on** after a step-off: add call levers at both ends, or the wait for it becomes most of the miss cost.
+  - **Engine risks to test**: velocity inherited from the moving car, the player straddling the car lip and the ledge (chamfer the edge so the lintel can't crush them), mantling from a moving platform.
 - **Drop chain**: ledges stepped down a cliff or shaft, each a free or committed drop, ending in a cave or item; seen from the top or from across a valley (`verticality.md` §3–5).
 - **Rooftop or beam traverse**: a route over the main path's roofs or rafters (Stormveil's lower rooftops), entered through a window or rubble ramp and ending above an enemy or at a shortcut.
 - **Invisible or illusory floor**: only with a probe item and a visible destination (Haligtree); never on the critical path.
@@ -95,11 +99,12 @@ FromSoftware's detours are small leaps of faith, each cued by something visible.
 Maps that use only the game's base movement, from very easy to near-impossible. **CS2KZ** is the best-documented ladder: 1 Very Easy ("for the average player who has never touched KZ before"), 2 Easy, 3 Medium, 4 Advanced, 5 Hard, 6 Very Hard, 7 Extreme, 8 Death, 9 Unfeasible (TAS only), 10 Impossible; ranked play caps at 8, and an approval team assigns tiers after public testing.
 
 - **Tiers move several dials at once**, not gap width alone. CS2KZ's mapper guide: T1 needs "no multi-strafing" (blocks ≤ 235 units), longjump blocks then step ~240, ~250, ~260, ~270, ~275 and > 275 to T7; T4–T5 add timed and anti-bhop blocks that "force a longjump or pre-keep"; T6 has "sequential intermixed gameplay elements", T7 "almost entirely" so. A tier attaches to a course and movement mode, not to a map: the same course can be T2 in one mode and T5 in another.
+- **Which scale?** The table below is for the game's own base kit, with "the move" = the reliable full running jump. Use it for any "KZ-style" or obby request without advanced movement tech. When the game has strafe or bhop tech (CS KZ, surf), measure each technique's envelope as its own move row: in those communities the tiers crowd into the top ~15% of a technique's range (CS2KZ blocks sit at ~83–98% of the GOKZ top longjump threshold) [synthesis].
 - **Portable template** [synthesis; calibrate in your game]:
 
 | Tier | Hardest gap (% of the move) | Techniques | Chain without rest | Timing | Checkpoints |
 |---|---|---|---|---|---|
-| 1 Very easy | ≤ 50% | run + jump | 1–2 | none | every jump or two |
+| 1 Very easy | ≤ 50% | run + jump | 1–2 | none | short sections, frequent |
 | 2 Easy | ≤ 70% | + one basic (air control, mantle) | 2–3 | none | every section |
 | 3 Medium | ≤ 80% | + a second (ladder, wall, slide) | 3–5 | gentle | every section |
 | 4 Advanced | ≤ 90% | forced techniques appear | 4–6 | some timed blocks | per stage |
@@ -107,8 +112,10 @@ Maps that use only the game's base movement, from very easy to near-impossible. 
 | 6 Very hard | ≤ 100% | sequential mixes | long | tight | sparse |
 | 7–8 Extreme–Death | at the limit | everything | almost no rests | frame-tight | optional (PRO runs) |
 
-  The checker's tier estimate follows this table: the hardest link on the easiest route sets the base, and long chains, three or more techniques above 75%, and punishing replays each add one. "The move" is the reliable measured value; for tech-heavy communities (KZ, surf, speedrun movement), measure each technique's envelope separately: there the tiers crowd into the top ~15% of a technique's range (CS2KZ blocks sit at ~83–98% of the GOKZ top longjump threshold) [synthesis].
-- **Checkpoints are a separate dial from tier.** KZ splits runs into PRO (no teleports) and TP (checkpoints allowed), so one map serves learners and competitors. Momentum Mod's rules: never send a failing player back before a checkpoint; checkpoints at least ~10 s apart in a good run; reset destinations face forward; start zones big enough to build speed.
+  The checker's tier estimate follows this table: the hardest link on the easiest route sets the base, and long chains, three or more techniques above 75%, punishing replays and a timed window of 1 s or less each add one.
+- **Technique gates** (crouch-jump, a dash-only gap): mark the move `Gate = yes` so it's graded on distance, then place each gate where the base move clearly fails (≥ ~104% of it, so a plain jump visibly almost makes it) and the technique still has margin. Give gate walls one consistent look (the same pipe or rail band) so players learn "this means duck". Teach each gate on a staircase where the plain move works, barely works, then fails.
+- **Scan for skips.** On movement maps the checker's skip scan matters most: unintended corner cuts and long-range jumps that skip stages are the classic flaw. List deliberate skips as links and walls that stop the rest as `blocked`.
+- **Checkpoints are a separate dial from tier.** KZ splits runs into PRO (no teleports) and TP (checkpoints allowed), so one map serves learners and competitors. Momentum Mod's rules for ranked maps: never send a failing player back before a checkpoint; checkpoints at least ~10 s apart in a good run; reset destinations face forward; start zones big enough to build speed. Easy courses can checkpoint more often; the ~10 s rule keeps competitive splits meaningful.
 - **Mapping etiquette** (CS2KZ, Momentum): visible start and end, lighting readable for gameplay, no "jumps along a wall" corridors ("utilize the full 3D volume of your room"), teleports never face backwards.
 - **Teach before testing**: Celeste's Strawberry Jam collab has five difficulty lobbies, each with a gym that "teaches you all the tips and techniques you'll need", and a green-to-red meter per map. Build a gym for each technique a tier requires.
 - **Length is its own scale**: Eternal Towers of Hell (Roblox) sets length by tower type: 5–6 floors for a steeple, 10 for a tower, 12–25 for a citadel, 30+ for an obelisk.

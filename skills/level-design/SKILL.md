@@ -62,7 +62,7 @@ Scale the workflow to the request: a quick question gets a direct answer; a sing
 | `scripts/grid_lint.py` | Format gate for any character grid: size, ragged rows, unknown glyphs with `(col,row)`, counts, `--expect`, `--emit-ruled` for display |
 | `scripts/grid_puzzle_solve.py` | Sokoban-family puzzles (push, ice, keys/doors, pits, switches): solvable/unsolvable/unknown, optimal solution, `--forbid` bypass test, `--intended` shortcut test, `--metrics` difficulty signals, `--classes` uniqueness |
 | `scripts/platformer_reach.py` | Tile-map platformer levels with a movement-kit JSON: goal reachability, critical-jump margins, unreachable collectibles, softlocks, `--teaches` test |
-| `scripts/jump_links.py` | 3D (or any non-tile) jump sequences as a jump-link table: % of each move per link, critical links, softlocks, respawns past one-way links, lethal drops, depth-axis jumps, teasers, `--teaches`, tier estimate; prescriptive fixes |
+| `scripts/jump_links.py` | 3D (or any non-tile) jump sequences as a jump-link table: % of each move per link, critical links, softlocks, respawns past one-way links, fall bands, depth-axis jumps, teasers, skip scan, `--teaches`, tier estimate; prescriptive fixes |
 | `scripts/graph_check.py` | Lock-and-key / hub / dungeon graphs (JSON or Mermaid): reachability, key order, consumed-key softlocks, dead ends, loops |
 | `scripts/dependency_chart.py` | Puzzle dependency charts: cycles, unreachable puzzles, layer widths, bottlenecks, Mermaid export |
 | `scripts/beat_lint.py` | Beat-chart tables: rest around peaks, new concepts per beat, choice gaps, retry-cost budget, checkpoint coverage |
@@ -85,7 +85,7 @@ Invoke as `python3 -I scripts/<name>.py --help`. Exit codes: 0 pass, 1 fail, 2 b
 
 ## Platformers and jump puzzles
 
-Pick the row for what you're building, load only its files, and present no layout until its checker passes.
+Pick the row for what you're building and load its files; add the genre guide and `verticality.md` only when the level also needs them (a soulslike area, more than one floor). Present no layout until its checker passes. A single sequence needs the spec and an ordered list of beats; a full level also gets the beat chart.
 
 | Building… | Load | Write | Check |
 |---|---|---|---|
@@ -100,7 +100,8 @@ Gotchas:
 - **Numbers, not adjectives.** Every jump gets gap, rise, move and % of that move. "A tricky jump across the beams" is not a spec.
 - **Bands.** No critical jump above 90% of the move; depth-axis jumps (into the screen) ≤ 75% with landings ≥ 3 × player width; nothing usable at 100–130% (it looks makeable); teasers ≥ 130%.
 - **Goal before path.** The reward or exit is seen before the route; one take-off cue per hidden route; no blind critical jumps; optional puzzles get a vantage and one in-world hint.
-- **Every miss has a stated cost**, every respawn sits before every one-way link, and sequences longer than a few jumps get checkpoints.
+- **Every miss has a stated cost**, every respawn sits before every one-way link, and sequences longer than a few jumps get checkpoints. Falls stay clear (±10%) of the damage and lethal heights.
+- **Check what you didn't list.** Unlisted pairs within jumping range are skips; the checker's skip scan finds them when nodes have coordinates.
 - **Harder = more chaining, techniques and timing**, not wider gaps or more length. Movement-map tiers move several dials at once (jump-puzzles.md §7).
 - **Keep thinking and doing apart** on the critical path, and never change the physics for one section.
 - **Optional content loops back** and never blocks the ending; observation earns upgrades, pure-skill puzzles earn vistas, cosmetics or achievements.
