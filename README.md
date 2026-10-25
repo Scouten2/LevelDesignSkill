@@ -6,8 +6,9 @@ It covers design, critique and layout verification (bundled Python checkers), wi
 
 ## Highlights
 
-- **Verify, don't assert.** Seven bundled Python scripts (stdlib only) check layouts instead of trusting the model's spatial reasoning: tile-map lint, a Sokoban-family puzzle solver with bypass/shortcut/uniqueness tests and validated difficulty metrics, platformer jump-reachability from a movement kit (including a "does this level actually teach the move?" test), lock-and-key graph checks, puzzle dependency charts, beat-chart linting and layout comparison.
-- **Deep puzzle and platformer guides** (3 + 4 files) built from primary sources: Blow and ten Bosch, Traynor, Teikari, Gilbert, Valve's Portal commentary, Jarušek & Pelánek; Hayashida, Celeste's released code, McMillen, Keren's camera article, World 1-1 measured from its tile map.
+- **Verify, don't assert.** Eight bundled Python scripts (stdlib only) check layouts instead of trusting the model's spatial reasoning: tile-map lint, a Sokoban-family puzzle solver with bypass/shortcut/uniqueness tests and validated difficulty metrics, platformer jump-reachability from a movement kit (including a "does this level actually teach the move?" test), a 3D jump-link checker for traversal routes and jump puzzles (respawns past one-way links, depth-axis jumps, teasers, tier estimate), lock-and-key graph checks, puzzle dependency charts, beat-chart linting and layout comparison.
+- **Jump puzzles and 3D traversal**: hidden detours (Elden Ring-style lift step-offs and ledge routes), optional world jumping puzzles (Guild Wars 2, Destiny), challenge chambers (Jedi), puzzle-platforming and ability-gated routes (Supraland), and movement-map difficulty tiers (KZ, obbies, Celeste mods), with a jump-sequence spec template and a worked example.
+- **Deep puzzle and platformer guides** (3 + 6 files) built from primary sources: Blow and ten Bosch, Traynor, Teikari, Gilbert, Valve's Portal commentary, Jarušek & Pelánek; Hayashida, Celeste's released code, McMillen, Keren's camera article, World 1-1 measured from its tile map.
 - **Gameplay first and verticality** as core stances: grey description test, verb-per-space table, art-pass re-check; eight uses of height, "see it, then reach it from an unexpected height", a fairness rule for hidden vertical routes, drop bands, a Z-axis checklist.
 - **Fun checks** with labelled evidence strength, a weighted **review rubric**, and a level-scope **accessibility** guide with photosensitivity limits.
 - **18 genre guides**, from shooters, stealth and horror to tactics, RTS, tower defense, casual/mobile, VR, co-op PvE, boss arenas and raids, racing and UGC platforms.
@@ -20,16 +21,17 @@ It covers design, critique and layout verification (bundled Python checkers), wi
 skills/level-design/
 ├── SKILL.md                 # hub: core stance, workflow, scripts, output conventions, routing
 ├── SOURCES.md               # every source with URL and verification status (search it, don't load it whole)
-├── assets/                  # level brief, puzzle insight card, movement kit, playtest hypothesis card,
-│                            # project-context template
+├── assets/                  # level brief, puzzle insight card, movement kit, jump-sequence spec and
+│                            # worked example, playtest hypothesis card, project-context template
 ├── agents/openai.yaml       # optional Codex / ChatGPT display metadata (other tools ignore it)
-├── scripts/                 # grid_lint, grid_puzzle_solve, platformer_reach, graph_check,
-│   └── tests/               # dependency_chart, beat_lint, level_metrics (+ 84 unit tests)
+├── scripts/                 # grid_lint, grid_puzzle_solve, platformer_reach, jump_links, graph_check,
+│   └── tests/               # dependency_chart, beat_lint, level_metrics (+ 93 unit tests)
 └── references/
     ├── principles.md  layout-and-flow.md  verticality.md  metrics.md  process.md
     ├── grid-conventions.md  fun-checks.md  review-rubric.md  accessibility.md  playtesting-and-critique.md
     ├── puzzle-craft.md  puzzle-sequencing.md  puzzle-verification.md
     ├── platformer-craft.md  platformer-metrics.md  platformer-camera.md  platformer-checks.md
+    ├── platformer-3d.md  jump-puzzles.md
     └── genre-*.md, boss-arenas-and-raids.md   # 18 genre guides
 ```
 

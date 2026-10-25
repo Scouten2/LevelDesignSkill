@@ -1,0 +1,10 @@
+{"kit": {"units": "u", "player_width": 32,
+         "moves": {"jump": {"distance": 250, "height": 58}, "bhop": {"distance": 300, "height": 58}}},
+ "nodes": [{"id": "S", "role": "start"}, {"id": "a"}, {"id": "b"}, {"id": "c"}, {"id": "d"},
+           {"id": "e"}, {"id": "G", "role": "goal"}],
+ "links": [{"from": "S", "to": "a", "move": "jump", "gap": 215, "rise": 0, "fail": "restart"},
+           {"from": "a", "to": "b", "move": "bhop", "gap": 260, "rise": 0, "fail": "restart"},
+           {"from": "b", "to": "c", "move": "jump", "gap": 220, "rise": 0, "fail": "restart"},
+           {"from": "c", "to": "d", "move": "bhop", "gap": 262, "rise": 0, "fail": "restart"},
+           {"from": "d", "to": "e", "move": "jump", "gap": 222, "rise": 0, "fail": "restart"},
+           {"from": "e", "to": "G", "move": "jump", "gap": 100, "rise": 0, "fail": "restart"}]}

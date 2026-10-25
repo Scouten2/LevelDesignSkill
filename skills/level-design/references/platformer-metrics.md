@@ -177,7 +177,7 @@ Celeste as a kit JSON (rounded as above):
  "dash_distance": 4.5, "fall_damage_height": null, "safe_fall_height": null}
 ```
 
-The model is a parabola with variable height; it ignores apex hang, acceleration, momentum and lift boosts, so treat its margins as approximate and keep critical jumps inside 90%. For 3D kits, use the jump math in `metrics.md` and the paper checks; the script is 2D only.
+The model is a parabola with variable height; it ignores apex hang, acceleration, momentum and lift boosts, so treat its margins as approximate and keep critical jumps inside 90%. The script is 2D only: for 3D kits and non-tile levels, fill the Moves table of `assets/jump-sequence-spec.md` and check with `jump_links.py` (`platformer-3d.md` §1). Difficulty tiers for movement maps are in `jump-puzzles.md` §7.
 
 ## 12. Review checklist
 

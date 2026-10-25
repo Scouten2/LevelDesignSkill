@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: movement-map-difficulty-tiers
+expected_outcome: |
+  Three base-movement courses specified with numeric jump distances against the stated kit, where difficulty rises through several dials (gap fraction, techniques, chaining, timing, checkpoints) rather than gap width alone, with checkpoint rules stated and honest verification.

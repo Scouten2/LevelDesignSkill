@@ -22,6 +22,7 @@ Grid format, legends and the general check loop are in `grid-conventions.md`; ki
 - LLM-drawn platformer maps fail in predictable ways: ragged rows, jumps that look fine but exceed the kit, and paths with impossible "airtime". MarioGPT's path annotations drew routes a real agent couldn't follow, so a checker must model gravity and jump arcs, not grid adjacency. Never call a platformer level "beatable" or a jump "makeable" without a script run or a labelled hand trace.
 - The reach script answers **"can a perfect player with this kit get there?"** It does not answer whether a human will, whether the jump is readable, or whether the camera shows it. The paper checks cover those.
 - Every result names what wasn't modelled (enemy timing, moving platforms, lifts, springs, camera). Repeat that line in your report.
+- **Not a tile map?** 3D sequences, embedded jump puzzles and movement maps go in a jump-link table and through `jump_links.py` instead (`platformer-3d.md` §1); the same bands apply.
 
 ## 2. The paper-check table
 
